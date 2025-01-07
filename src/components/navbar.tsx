@@ -1,4 +1,5 @@
-"use client"
+
+"use client";
 import { useState } from "react";
 import Link from "next/link";
 import logo from "../public/Frame.png";
@@ -14,19 +15,23 @@ export default function Navbar() {
     <div>
       {/* Top Bar */}
       <div className="w-full h-9 bg-[#F5F5F5] text-[#111111] flex items-center justify-between px-4 md:px-16">
-        <Image src={logo} alt="logo" className="h-6 w-auto" />
+        <Link href={"/"}>
+          <Image src={logo} alt="logo" className="h-6 w-auto" />
+        </Link>
         <div>
           <ul className="flex gap-2 text-xs md:text-sm md:gap-3">
-          
             <li>|</li>
-            <li><Link href="/about"> Help </Link></li>
+            <li>
+              <Link href="/about"> Help </Link>
+            </li>
             <li>|</li>
-              <li><Link href="/joinuspage">Join Us</Link>
-                </li>
+            <li>
+              <Link href="/joinuspage">Join Us</Link>
+            </li>
             <li>|</li>
             <li>
               <Link href="/loginpage">Sign In</Link>
-              </li>
+            </li>
           </ul>
         </div>
       </div>
@@ -37,15 +42,25 @@ export default function Navbar() {
           {/* Left Section */}
           <div className="flex items-center space-x-4 md:space-x-40">
             <Image src={frame} alt="logo1" className="h-8 w-auto" />
-            <ul className="hidden md:flex text-black space-x-2 md:space-x-16 text-xs md:text-base ">
-            
-              <li className="whitespace-nowrap hover:bg-indigo-700"><Link href="/allproduct"> New & Featured</Link>
-         </li>
-              <li className="hover:bg-indigo-700"><Link href="/allproduct">Men </Link></li>
-              <li className="hover:bg-indigo-700"><Link href="/allproduct">Women </Link></li>
-              <li className="hover:bg-indigo-700"><Link href="/cartpage">Kids </Link></li>
-              <li className="hover:bg-indigo-700"><Link href="/checkout"> Sale</Link></li>
-              <li className="hover:bg-indigo-700"><Link href="/productdetail"> SNKRS</Link></li>
+            <ul className="hidden md:flex text-black space-x-2 md:space-x-16 text-xs md:text-base">
+              <li className="whitespace-nowrap hover:text-gray-800">
+                <Link href="/category"> New & Featured</Link>
+              </li>
+              <li className="hover:text-gray-800">
+                <Link href="/category">Men </Link>
+              </li>
+              <li className="hover:text-gray-800">
+                <Link href="/category">Women </Link>
+              </li>
+              <li className="hover:text-gray-800">
+                <Link href="/cartpage">Kids </Link>
+              </li>
+              <li className="hover:text-gray-800">
+                <Link href="/checkout"> Sale</Link>
+              </li>
+              <li className="hover:text-gray-800">
+                <Link href="/productdetail"> SNKRS</Link>
+              </li>
             </ul>
           </div>
 
@@ -65,14 +80,24 @@ export default function Navbar() {
         {isMenuOpen && (
           <div className="absolute top-16 left-0 w-full bg-white shadow-lg md:hidden">
             <ul className="flex flex-col items-center text-black text-sm space-y-4 py-4">
-            <li className="whitespace-nowrap"><Link href="/allproduct"> New & Featured</Link>
-         </li>
-              <li><Link href="/allproduct">Men </Link></li>
-              <li><Link href="/allproduct">Women </Link></li>
-              <li ><Link href="/cartpage">Kids </Link></li>
-              <li ><Link href="/checkout"> Sale</Link></li>
-              <li><Link href="/productdetail"> SNKRS</Link></li>
-             
+              <li className="whitespace-nowrap">
+                <Link href="/allproduct"> New & Featured</Link>
+              </li>
+              <li>
+                <Link href="/category">Men </Link>
+              </li>
+              <li>
+                <Link href="/category">Women </Link>
+              </li>
+              <li>
+                <Link href="/cartpage">Kids </Link>
+              </li>
+              <li>
+                <Link href="/checkout"> Sale</Link>
+              </li>
+              <li>
+                <Link href="/productdetail"> SNKRS</Link>
+              </li>
             </ul>
           </div>
         )}
@@ -80,5 +105,3 @@ export default function Navbar() {
     </div>
   );
 }
-
-
