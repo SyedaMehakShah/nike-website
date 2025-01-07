@@ -1,6 +1,7 @@
 
 "use client";
 import { useCart } from "@/app/context/CartContext";
+import Image from 'next/image';
 
 export default function CartPage() {
   const { cart, removeFromCart, getTotalPrice } = useCart();
@@ -16,7 +17,7 @@ export default function CartPage() {
                 key={product.id}
                 className="border-b border-gray-300 pb-6 mb-6 flex flex-wrap"
               >
-                <img
+                <Image
                   src={product.image.src}
                   alt={product.name}
                   className="w-24 h-24 object-cover rounded-md"

@@ -4,7 +4,6 @@ import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { HiOutlineShoppingCart } from "react-icons/hi2";
-import { StaticImageData } from "next/image";
 import { products as originalProducts } from "@/components/productData";
 import { useCart } from "@/app/context/CartContext";
 
