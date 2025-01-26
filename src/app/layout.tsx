@@ -6,6 +6,7 @@ import "./globals.css";
 import { CartProvider } from "@/app/context/CartContext";
 
 
+
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",
@@ -34,9 +35,8 @@ export default function RootLayout({
       >
         <Navbar />
         <CartProvider>
-             {children}
-             </CartProvider>
-     
+        {children}
+      </CartProvider>
         <Footer />
 
       </body>

@@ -1,61 +1,57 @@
 
-"use client";
-import { useCart } from "@/app/context/CartContext";
-import Image from 'next/image';
 
-export default function CartPage() {
-  const { cart, removeFromCart, getTotalPrice } = useCart();
+import { getCart } from "../actions/cartActions"
+import Image from "next/image"
+import { urlFor } from "@/sanity/lib/image"
+
+
+// interface Product {
+//   _id: string;
+//   productName: string;
+//   _type: string;
+//   image: string | null; 
+//   price: number;
+//   category: string | string[];
+//   description: string;
+// }
+export default async function CartPage() {
+  const cartItems = await getCart()
 
   return (
-    <div className="min-h-screen py-12">
-      <div className="container mx-auto px-6 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-6">
-        <div className="col-span-12 sm:col-span-12 lg:col-span-7 space-y-8">
-          <h2 className="text-2xl font-bold mb-6">Bag</h2>
-          {cart.length > 0 ? (
-            cart.map((product) => (
-              <div
-                key={product.id}
-                className="border-b border-gray-300 pb-6 mb-6 flex flex-wrap"
-              >
+    <div className="max-w-4xl mx-auto mt-8">
+      <h1 className="text-3xl font-bold mb-6">Your Cart</h1>
+      {cartItems.length === 0 ? (
+        <p>Your cart is empty.</p>
+      ) : (
+        <ul>
+          {cartItems.map((item) => (
+            <li key={item._id} className="flex items-center gap-4 mb-4">
+              {item.image ? (
                 <Image
-                  src={product.image.src}
-                  alt={product.name}
-                  className="w-24 h-24 object-cover rounded-md"
+                  src={urlFor(item.image).url()}
+                  alt={item.productName}
+                  width={100}
+                  height={100}
+                  className="object-cover rounded-md"
                 />
-                <div className="flex-1 ml-6">
-                  <h3 className="text-lg font-semibold">{product.name}</h3>
-                  <p className="text-[#757575] mt-2">{product.category}</p>
-                  <p className="text-[#757575] mt-2">Price: {product.price}</p>
-                  <p className="text-[#757575] mt-2">
-                    Quantity: {product.quantity}
-                  </p>
-                  <button
-                    className="mt-4 text-red-500 hover:underline"
-                    onClick={() => removeFromCart(product.id)}
-                  >
-                    Remove
-                  </button>
+              ) : (
+                <div className="w-[100px] h-[100px] bg-gray-200 rounded flex items-center justify-center">
+                  <span className="text-gray-400 text-xs">No image</span>
                 </div>
+              )}
+              <div>
+                <h2 className="text-xl font-semibold">{item.productName}</h2>
+                <p className="text-gray-600">Quantity: {item.quantity}</p>
+                <p className="text-gray-600">Price: ${item.price.toFixed(2)}</p>
               </div>
-            ))
-          ) : (
-            <p>Your cart is empty.</p>
-          )}
-        </div>
-
-        <div className="col-span-12 sm:col-span-12 lg:col-span-4">
-          <div className="bg-white p-6 shadow-md rounded-md">
-            <h2 className="text-2xl font-bold mb-4">Summary</h2>
-          
-              <p className="text-gray-600">
-  Subtotal: ₹ {isNaN(getTotalPrice()) ? "Invalid Price" : getTotalPrice().toLocaleString("en-IN")}
-</p>
-              <button className="mt-6 w-full bg-black text-white py-2 rounded-md hover:bg-gray-800">
-                Checkout
-              </button>
-          </div>
-        </div>
-      </div>
+            </li>
+          ))}
+        </ul>
+      )}
+      <p className="mt-4 text-xl font-bold">
+        Total: ${cartItems.reduce((total, item) => total + item.price * item.quantity, 0).toFixed(2)}
+      </p>
     </div>
-  );
+  )
 }
+

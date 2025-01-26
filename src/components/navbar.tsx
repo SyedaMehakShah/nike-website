@@ -1,4 +1,3 @@
-
 "use client";
 import { useState } from "react";
 import Link from "next/link";
@@ -47,19 +46,17 @@ export default function Navbar() {
                 <Link href="/category"> New & Featured</Link>
               </li>
               <li className="hover:text-gray-800">
-                <Link href="/category">Men </Link>
+                <Link href="/productList">Men </Link>
               </li>
               <li className="hover:text-gray-800">
-                <Link href="/category">Women </Link>
+                <Link href="/productList">Women </Link>
               </li>
-              <li className="hover:text-gray-800">
-                <Link href="/cartpage">Kids </Link>
-              </li>
+              
               <li className="hover:text-gray-800">
                 <Link href="/checkout"> Sale</Link>
               </li>
               <li className="hover:text-gray-800">
-                <Link href="/productdetail"> SNKRS</Link>
+                <Link href="/productList"> SNKRS</Link>
               </li>
             </ul>
           </div>
@@ -84,16 +81,14 @@ export default function Navbar() {
                 <Link href="/allproduct"> New & Featured</Link>
               </li>
               <li>
-                <Link href="/category">Men </Link>
+                <Link href="/productList">Men </Link>
               </li>
               <li>
-                <Link href="/category">Women </Link>
+                <Link href="/productList">Women </Link>
               </li>
+              
               <li>
-                <Link href="/cartpage">Kids </Link>
-              </li>
-              <li>
-                <Link href="/checkout"> Sale</Link>
+                <Link href="/productList"> Sale</Link>
               </li>
               <li>
                 <Link href="/productdetail"> SNKRS</Link>

@@ -1,12 +1,59 @@
+"use client";
 import { IoIosArrowBack } from "react-icons/io";
 import { IoIosArrowForward } from "react-icons/io";
+import { useEffect, useState } from "react";
+import { client } from "@/sanity/lib/client";
 import Image from "next/image";
-import image4 from "@/public/Image (4).png";
-import image5 from "@/public/Image (5).png";
-import image6 from "@/public/Image (6).png";
-import image7 from "@/public/Image (7).png";
+import { urlFor } from "@/sanity/lib/image"; // Adjust the import path as necessary
+
+interface Product {
+  _id: string;
+  name: string;
+  image?: { url: string };
+  description: string;
+  price: number;
+  slug: { current: string }; // slug as string
+  category: string | string[]; // category can be a string or array of strings
+}
 
 export default function Gearup() {
+  const [products, setProducts] = useState<Product[]>([]);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        // Define the slugs for the products you want to display
+        const slugs = [
+          "air-jordan-1-elevate-low",
+          "nike-dri-fit-uv-hyverse",
+          "nike-pegasus-40",
+          "nike-zoom-fly-5",
+        ];
+        
+        const query = `*[_type == "product" && slug.current in ${JSON.stringify(slugs)}] {
+          _id,
+          name,
+          description,
+          price,
+          slug,
+          category,
+          image {
+            asset -> {
+              url
+            }
+          }
+        }`;
+
+        const result = await client.fetch(query);
+        setProducts(result);
+      } catch (error) {
+        console.error("Error fetching products:", error);
+      }
+    };
+
+    fetchProducts();
+  }, []);
+
   return (
     <div className="w-full max-w-screen-xl mx-auto mt-20 pt-6 px-4 sm:px-6 md:px-8">
       {/* Header Section */}
@@ -40,50 +87,38 @@ export default function Gearup() {
 
       {/* Product Section */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 mt-8">
-        {/* Product 1 */}
-        <div className="flex flex-col items-center text-center">
-          <Image src={image4} alt="Nike Dri-FIT ADV TechKnit Ultra" />
-          <p className="font-semibold text-[#111111] mt-3 text-sm md:text-base">
-            Nike Dri-FIT ADV TechKnit Ultra
-            <span className="block text-base font-normal">₹ 3895</span>
-          </p>
-          <span className="text-[#757575] text-xs md:text-sm">
-            Men&apos;s Short-Sleeve Running Top
-          </span>
-        </div>
-        {/* Product 2 */}
-        <div className="flex flex-col items-center text-center">
-          <Image src={image5} alt="Nike Dri-FIT Challenger" />
-          <p className="font-semibold text-[#111111] mt-3 text-sm md:text-base">
-            Nike Dri-FIT Challenger
-            <span className="block text-base font-normal">₹ 2495</span>
-          </p>
-          <span className="text-[#757575] text-xs md:text-sm">
-            Men&apos;s 18cm (approx.) 2-in-1 Versatile Shorts
-          </span>
-        </div>
-        {/* Product 3 */}
-        <div className="flex flex-col items-center text-center">
-          <Image src={image6} alt="Nike Dri-FIT ADV Run Division" />
-          <p className="font-semibold text-[#111111] mt-3 text-sm md:text-base">
-            Nike Dri-FIT ADV Run Division
-            <span className="block text-base font-normal">₹ 5295</span>
-          </p>
-          <span className="text-[#757575] text-xs md:text-sm">
-            Women&apos;s Long-Sleeve Running Top
-          </span>
-        </div>
-        {/* Product 4 */}
-        <div className="flex flex-col items-center text-center">
-          <Image src={image7} alt="Nike Fast" />
-          <p className="font-semibold text-[#111111] mt-3 text-sm md:text-base">
-            Nike Fast
-            <span className="block text-base font-normal">₹ 3795</span>
-          </p>
-          <span className="text-[#757575] text-xs md:text-sm">
-            Women&apos;s Mid-Rise 7/8 Running Leggings with Pockets
-          </span>
-        </div>
+        {products.map((product) => (
+          <div
+            key={product._id}
+            className="flex flex-col items-center text-center"
+          >
+            {product.image ? (
+              <Image
+                src={urlFor(product.image).url()}
+                alt={`Image of ${product.name}`}
+                width={300}
+                height={300}
+                className="object-cover rounded-md"
+              />
+            ) : (
+              <div className="w-300 h-300 flex items-center justify-center bg-gray-200 text-gray-500 rounded-md">
+                No Image Available
+              </div>
+            )}
+            <h2 className="mt-2 font-semibold text-lg text-center text-black">
+              {product.name}
+            </h2>
+            <p className="mt-1 text-sm text-center text-gray-600">
+              {/* Check if category is an array */}
+              {Array.isArray(product.category)
+                ? product.category.join(", ")
+                : product.category}
+            </p>
+            <span className="mt-2 font-bold text-lg text-center">
+              ₹{product.price.toFixed(2)}
+            </span>
+          </div>
+        ))}
       </div>
     </div>
   );
