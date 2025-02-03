@@ -3,17 +3,17 @@ import { IoIosArrowBack } from "react-icons/io";
 import { IoIosArrowForward } from "react-icons/io";
 import { useEffect, useState } from "react";
 import { client } from "@/sanity/lib/client";
+import Link from "next/link";
 import Image from "next/image";
-import { urlFor } from "@/sanity/lib/image"; // Adjust the import path as necessary
-
+import { urlFor } from "@/sanity/lib/image"; 
 interface Product {
   _id: string;
   name: string;
   image?: { url: string };
   description: string;
   price: number;
-  slug: { current: string }; // slug as string
-  category: string | string[]; // category can be a string or array of strings
+  slug: { current: string }; 
+  category: string | string[]; 
 }
 
 export default function Gearup() {
@@ -86,12 +86,14 @@ export default function Gearup() {
       </div>
 
       {/* Product Section */}
+      
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 mt-8">
         {products.map((product) => (
           <div
             key={product._id}
             className="flex flex-col items-center text-center"
           >
+            <Link href={`/product/${product.slug.current}`}>
             {product.image ? (
               <Image
                 src={urlFor(product.image).url()}
@@ -117,7 +119,9 @@ export default function Gearup() {
             <span className="mt-2 font-bold text-lg text-center">
               ₹{product.price.toFixed(2)}
             </span>
+            </Link>
           </div>
+          
         ))}
       </div>
     </div>

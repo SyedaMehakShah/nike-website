@@ -2,6 +2,7 @@ import { FaFacebookF } from "react-icons/fa";
 import { TiSocialYoutubeCircular } from "react-icons/ti";
 import { FaTwitter } from "react-icons/fa";
 import { TiSocialInstagram } from "react-icons/ti";
+import Link from 'next/link';
 
 
 export default function Footer() {
@@ -24,13 +25,16 @@ export default function Footer() {
 
           {/* Column 2 */}
           <div>
+            <Link href="/about">
             <h1 className="font-semibold text-[#FFFFFF] mb-2">Get Help</h1>
+            </Link>
             <ul className="space-y-1">
               <li>Order Status</li>
               <li>Delivery</li>
               <li>Returns</li>
               <li>Payment Options</li>
             </ul>
+           
           </div>
 
           {/* Column 3 */}

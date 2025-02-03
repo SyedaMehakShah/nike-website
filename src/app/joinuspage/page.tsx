@@ -1,4 +1,3 @@
-
 import Image from "next/image";
 import frame1 from "@/public/Frame (1).png";
 
@@ -8,7 +7,11 @@ export default function JoinUsPage() {
       <div className="w-full max-w-md bg-white shadow-lg p-6 sm:p-8 rounded-lg">
         {/* Logo and Heading */}
         <div className="text-center">
-          <Image src={frame1} alt="Nike Logo" className="mx-auto w-20 sm:w-24 h-auto" />
+          <Image
+            src={frame1}
+            alt="Nike Logo"
+            className="mx-auto w-20 sm:w-24 h-auto"
+          />
           <h1 className="text-xl sm:text-2xl font-semibold text-gray-800 mt-4">
             Become A Nike Member
           </h1>

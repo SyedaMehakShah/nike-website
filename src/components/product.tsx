@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import Image from "next/image";
+import Link from "next/link";
 import { client } from "@/sanity/lib/client"; 
 import { urlFor } from "@/sanity/lib/image"; 
 
@@ -71,7 +72,7 @@ export default function Product() {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
         {products.map((product) => (
           <div key={product._id} className="bg-white shadow-sm p-4 rounded-lg">
-            {/* Check if product.image and product.image.url are valid */}
+            <Link href={`/product/${product.slug.current}`}>
            {product.image ? (
                          <Image
                            src={urlFor(product.image).url()}
@@ -89,6 +90,7 @@ export default function Product() {
               {product.name} <span>₹ {product.price}</span>
             </p>
             <span className="text-sm text-[#757575]">{product.category}</span>
+            </Link>
           </div>
         ))}
       </div>

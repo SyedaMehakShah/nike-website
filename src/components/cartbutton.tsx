@@ -1,13 +1,29 @@
 
 
 "use client";
-
+// components/cartbutton.tsx
 import { useState } from "react";
 import { HiOutlineShoppingCart } from "react-icons/hi";
 
 interface AddToCartButtonProps {
   addToCart: (productId: string) => Promise<void>; // Accepts productId as an argument
   productId: string;
+}
+// Removed unused ButtonProps interface
+
+
+interface AddToCartButtonProps {
+
+  variant: string;
+
+  size: string;
+
+  onClick: () => Promise<void>;
+
+  disabled: boolean;
+
+  children?: React.ReactNode;
+
 }
 
 export default function AddToCartButton({

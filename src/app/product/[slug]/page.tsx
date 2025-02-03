@@ -54,7 +54,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
     "use server";
     await addToCart({
       _id: product._id,
-      productName: product.productName,
+      name : product.productName,
       price: product.price,
       image: product.image || "/placeholder.svg", // Fallback to placeholder if image is null
       quantity: 1,
@@ -89,6 +89,10 @@ export default async function ProductPage({ params }: ProductPageProps) {
           <AddToCartButton
             productId={product._id}
             addToCart={handleAddToCart}
+            variant="primary"
+            size="medium"
+            onClick={handleAddToCart}
+            disabled={false}
           />
           </Link>
         </div>

@@ -1,19 +1,10 @@
 
-
 import { getCart } from "../actions/cartActions"
 import Image from "next/image"
+import Link from "next/link"
 import { urlFor } from "@/sanity/lib/image"
+// cartpage/page.tsx
 
-
-// interface Product {
-//   _id: string;
-//   productName: string;
-//   _type: string;
-//   image: string | null; 
-//   price: number;
-//   category: string | string[];
-//   description: string;
-// }
 export default async function CartPage() {
   const cartItems = await getCart()
 
@@ -28,8 +19,8 @@ export default async function CartPage() {
             <li key={item._id} className="flex items-center gap-4 mb-4">
               {item.image ? (
                 <Image
-                  src={urlFor(item.image).url()}
-                  alt={item.productName}
+                  src={urlFor(item.image || "").url()}
+                  alt={item.name}
                   width={100}
                   height={100}
                   className="object-cover rounded-md"
@@ -40,7 +31,7 @@ export default async function CartPage() {
                 </div>
               )}
               <div>
-                <h2 className="text-xl font-semibold">{item.productName}</h2>
+                <h2 className="text-xl font-semibold">{item.name}</h2>
                 <p className="text-gray-600">Quantity: {item.quantity}</p>
                 <p className="text-gray-600">Price: ${item.price.toFixed(2)}</p>
               </div>
@@ -51,6 +42,12 @@ export default async function CartPage() {
       <p className="mt-4 text-xl font-bold">
         Total: ${cartItems.reduce((total, item) => total + item.price * item.quantity, 0).toFixed(2)}
       </p>
+     
+      <Link href="/checkout">
+        <button className="m-5 bg-black text-white py-2 px-4 rounded">
+          Proceed to Checkout
+        </button>
+      </Link>
     </div>
   )
 }

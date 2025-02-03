@@ -7,6 +7,7 @@ import Image from "next/image";
 import Navicon from "./navicon";
 import { IoMdMenu, IoMdClose } from "react-icons/io";
 
+
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -26,10 +27,13 @@ export default function Navbar() {
             <li>|</li>
             <li>
               <Link href="/joinuspage">Join Us</Link>
+              
+                         
             </li>
             <li>|</li>
             <li>
               <Link href="/loginpage">Sign In</Link>
+             
             </li>
           </ul>
         </div>
@@ -43,7 +47,7 @@ export default function Navbar() {
             <Image src={frame} alt="logo1" className="h-8 w-auto" />
             <ul className="hidden md:flex text-black space-x-2 md:space-x-16 text-xs md:text-base">
               <li className="whitespace-nowrap hover:text-gray-800">
-                <Link href="/category"> New & Featured</Link>
+                <Link href="/productList"> New & Featured</Link>
               </li>
               <li className="hover:text-gray-800">
                 <Link href="/productList">Men </Link>
@@ -51,9 +55,9 @@ export default function Navbar() {
               <li className="hover:text-gray-800">
                 <Link href="/productList">Women </Link>
               </li>
-              
+
               <li className="hover:text-gray-800">
-                <Link href="/checkout"> Sale</Link>
+                <Link href="/productList"> Sale</Link>
               </li>
               <li className="hover:text-gray-800">
                 <Link href="/productList"> SNKRS</Link>
@@ -78,7 +82,7 @@ export default function Navbar() {
           <div className="absolute top-16 left-0 w-full bg-white shadow-lg md:hidden">
             <ul className="flex flex-col items-center text-black text-sm space-y-4 py-4">
               <li className="whitespace-nowrap">
-                <Link href="/allproduct"> New & Featured</Link>
+                <Link href="/productList"> New & Featured</Link>
               </li>
               <li>
                 <Link href="/productList">Men </Link>
@@ -86,12 +90,12 @@ export default function Navbar() {
               <li>
                 <Link href="/productList">Women </Link>
               </li>
-              
+
               <li>
                 <Link href="/productList"> Sale</Link>
               </li>
               <li>
-                <Link href="/productdetail"> SNKRS</Link>
+                <Link href="/productList"> SNKRS</Link>
               </li>
             </ul>
           </div>
