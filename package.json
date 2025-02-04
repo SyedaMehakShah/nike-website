@@ -10,7 +10,6 @@
     "import-data": "node scripts/importSanityData.mjs"
   },
   "dependencies": {
-    "@clerk/nextjs": "^6.10.6",
     "@heroicons/react": "^2.2.0",
     "@reduxjs/toolkit": "^2.5.1",
     "@sanity/client": "^6.27.2",
